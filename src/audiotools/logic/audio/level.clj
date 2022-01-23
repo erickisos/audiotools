@@ -22,3 +22,24 @@
 (s/defn intensity-level :- s/Num
   [intensity :- s/Num]
   (generic-level intensity 1e-12 10))
+
+(s/defn level->power :- s/Num
+  [level :- s/Num]
+  (->> 10
+       (/ level)
+       (Math/pow 10)
+       (* 1e-12)))
+
+(s/defn level->intensity :- s/Num
+  [level :- s/Num]
+  (->> 10
+       (/ level)
+       (Math/pow 10)
+       (* 1e-12)))
+
+(s/defn level->pressure :- s/Num
+  [level :- s/Num]
+  (->> 20
+       (/ level)
+       (Math/pow 10)
+       (* 20e-6)))

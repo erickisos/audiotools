@@ -1,7 +1,6 @@
 (ns audiotools.logic.audio.level-test
-  (:require
-   [clojure.test :refer [is testing deftest]]
-   [audiotools.logic.audio.level :as audio.level]))
+  (:require [clojure.test :refer [is testing deftest]]
+            [audiotools.logic.audio.level :as audio.level]))
 
 (deftest generic-level
   (testing "if the reference is zero, we can't calculate the level"
@@ -36,3 +35,33 @@
     (is (< 0 (audio.level/intensity-level 1))))
   (testing "the power level on a negative power signal is not a number"
     (is (Double/isNaN (audio.level/intensity-level -1)))))
+
+(deftest level->power
+  (testing "the power on a zero level is the reference"
+    (is (= 1e-12 (audio.level/level->power 0))))
+  (testing "the power on a 120 level is 1"
+    (is (= 1.0 (audio.level/level->power 120))))
+  (testing "the power on a positive level is positive"
+    (is (< 0 (audio.level/level->power 1))))
+  (testing "the power on a negative level it's still a positive number"
+    (is (< 0 (audio.level/level->power -1)))))
+
+(deftest level->intensity
+  (testing "the power on a zero level is the reference"
+    (is (= 1e-12 (audio.level/level->intensity 0))))
+  (testing "the power on a 120 level is 1"
+    (is (= 1.0 (audio.level/level->intensity 120))))
+  (testing "the power on a positive level is positive"
+    (is (< 0 (audio.level/level->intensity 1))))
+  (testing "the power on a negative level it's still a positive number"
+    (is (< 0 (audio.level/level->intensity -1)))))
+
+(deftest level->pressure
+  (testing "the power on a zero level is the reference"
+    (is (= 20e-6 (audio.level/level->pressure 0))))
+  (testing "the power on a 120 level is 20"
+    (is (= 20.0 (audio.level/level->pressure 120))))
+  (testing "the power on a positive level is positive"
+    (is (< 0 (audio.level/level->pressure 1))))
+  (testing "the power on a negative level it's still a positive number"
+    (is (< 0 (audio.level/level->pressure -1)))))
