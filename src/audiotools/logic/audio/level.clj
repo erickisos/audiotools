@@ -1,7 +1,8 @@
 (ns audiotools.logic.audio.level
   (:require [schema.core :as s]))
 
-(s/defn generic-level :- s/Num
+(s/defn level :- s/Num
+  "This is a generic level (dB) function."
   [value     :- s/Num
    reference :- s/Num
    factor    :- s/Num]
@@ -11,17 +12,20 @@
         Math/log10
         (* factor))))
 
-(s/defn power-level :- s/Num
+(s/defn power->level :- s/Num
+  "Level when the power is expressed as Watts."
   [power :- s/Num]
-  (generic-level power 1e-12 10))
+  (level power 1e-12 10))
 
-(s/defn pressure-level :- s/Num
+(s/defn pressure->level :- s/Num
+  "Level when the pressure is expressed as Pascals."
   [pressure :- s/Num]
-  (generic-level pressure 20e-6 20))
+  (level pressure 20e-6 20))
 
-(s/defn intensity-level :- s/Num
+(s/defn intensity->level :- s/Num
+  "Level when the intensity is expressed as Watts per square meter."
   [intensity :- s/Num]
-  (generic-level intensity 1e-12 10))
+  (level intensity 1e-12 10))
 
 (s/defn level->power :- s/Num
   [level :- s/Num]
@@ -43,3 +47,13 @@
        (/ level)
        (Math/pow 10)
        (* 20e-6)))
+
+(s/defn sum-levels :- s/Num
+  "Sum a list of levels."
+  [& levels]
+  (->> levels
+       (map #(/ % 10))
+       (map #(Math/pow 10 %))
+       (apply +)
+       (Math/log10)
+       (* 10)))
