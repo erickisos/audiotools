@@ -1,5 +1,6 @@
 (ns audiotools.logic.audio.level-test
-  (:require [clojure.test :refer [is testing deftest]]
+  (:require [clojure.test :refer [is testing]]
+            [schema.test :refer [deftest]]
             [audiotools.logic.audio.level :as audio.level]))
 
 (deftest level
