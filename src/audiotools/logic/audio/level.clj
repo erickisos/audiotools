@@ -27,13 +27,19 @@
   [intensity :- s/Num]
   (level intensity 1e-12 10))
 
+(s/defn ^:private value-as-exp :- s/Num
+  [level  :- s/Num
+   factor :- s/Num]
+  (->> factor
+       (/ level)
+       (Math/pow 10)))
+
 (s/defn ^:private level->value :- s/Num
   [level     :- s/Num
    reference :- s/Num
    factor    :- s/Num]
   (->> factor
-       (/ level)
-       (Math/pow 10)
+       (value-as-exp level)
        (* reference)))
 
 (s/defn level->power :- s/Num
@@ -51,7 +57,7 @@
 (s/defn log-sum :- s/Num
   "Sum a list of levels using a log operation."
   [& levels]
-  (let [sum-as-exp (fn [sum level] (+ sum (Math/pow 10 (/ level 10))))]
+  (let [sum-as-exp (fn [sum level] (->> 10 (value-as-exp level) (+ sum)))]
     (->> levels
          (reduce sum-as-exp 0)
          Math/log10
