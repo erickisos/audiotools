@@ -1,0 +1,28 @@
+name: Check linting
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+jobs:
+  lint:
+    name: Execute Clojure LSP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@5.0
+        with:
+          cli: 1.10.3.986
+      - name: Setup clojure-lsp
+        uses: clojure-lsp/setup-clojure-lsp@v1
+        with:
+          clojure-lsp-version: 2022.05.03-12.35.40
+      - name: Check linting
+        run: "clojure-lsp diagnostics"

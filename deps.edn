@@ -1,5 +1,11 @@
 {:deps    {prismatic/schema           {:mvn/version "1.2.0"}
            nubank/matcher-combinators {:mvn/version "3.3.1"}}
- :aliases {:test {:extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
-                  :extra-paths ["test/integration" "test/unit"]
-                  :main-opts   ["-m" "kaocha.runner"]}}}
+ :aliases {:test        {:extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
+                         :extra-paths ["test/integration" "test/unit"]
+                         :main-opts   ["-m" "kaocha.runner"]}
+           :unit        {:extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
+                         :extra-paths ["test/unit"]
+                         :main-opts   ["-m" "kaocha.runner"]}
+           :integration {:extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
+                         :extra-paths ["test/integration"]
+                         :main-opts   ["-m" "kaocha.runner"]}}}

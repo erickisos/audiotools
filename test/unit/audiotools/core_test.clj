@@ -1,7 +1,6 @@
 (ns audiotools.core-test
-  (:require
-   [audiotools.core :as subject]
-   [clojure.test :refer [deftest is]]))
+  (:require [clojure.test :refer [deftest is]]
+            [audiotools.core :as subject]))
 
 (deftest main-test
   (is (nil? (subject/-main))))
