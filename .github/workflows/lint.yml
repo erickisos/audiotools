@@ -1,9 +1,9 @@
-name: Run tests
+name: Check linting
 on: [push]
 
 jobs:
-  unit-testing:
-    name: Run unit tests
+  lint:
+    name: Execute Clojure LSP
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,5 +17,9 @@ jobs:
         uses: DeLaGuardo/setup-clojure@5.0
         with:
           cli: 1.10.3.986
-      - name: Execute unit tests
-        run: "clojure -M:unit"
+      - name: Setup clojure-lsp
+        uses: clojure-lsp/setup-clojure-lsp@v1
+        with:
+          clojure-lsp-version: 2022.05.03-12.35.40
+      - name: Check linting
+        run: "clojure-lsp diagnostics"
