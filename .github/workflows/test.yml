@@ -18,4 +18,4 @@ jobs:
         with:
           cli: 1.11.0
       - name: Execute unit tests
-        run: "clj -M:unit"
+        run: "clojure -M:unit"
