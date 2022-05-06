@@ -7,7 +7,7 @@
       (Math/pow 2)
       (* 4 Math/PI)))
 
-(s/defn circle-radius :- s/Num
+(s/defn radius :- s/Num
   [area :- s/Num]
   (-> area
       (/ 4 Math/PI)

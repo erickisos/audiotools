@@ -1,8 +1,7 @@
 (ns audiotools.logic.audio.level-test
-  (:require
-   [audiotools.logic.audio.level :as audio.level]
-   [clojure.test :refer [is testing]]
-   [schema.test :refer [deftest]]))
+  (:require [audiotools.logic.audio.level :as audio.level]
+            [clojure.test :refer [is testing]]
+            [schema.test :refer [deftest]]))
 
 (deftest level
   (testing "if the reference is zero, we can't calculate the level"
