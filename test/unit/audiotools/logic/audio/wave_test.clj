@@ -1,7 +1,8 @@
 (ns audiotools.logic.audio.wave-test
-  (:require [audiotools.logic.audio.wave :as audio.wave]
-            [clojure.test :refer [is testing]]
-            [schema.test :refer [deftest]]))
+  (:require
+   [audiotools.logic.audio.wave :as audio.wave]
+   [clojure.test :refer [is testing]]
+   [schema.test :refer [deftest]]))
 
 (deftest velocity+frequency->wavelength
   (testing "the wavelength on a zero frequency can't be calculated"
