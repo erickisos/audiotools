@@ -1,5 +1,5 @@
-{:deps {prismatic/schema {:mvn/version "1.2.0"}
-        nubank/matcher-combinators {:mvn/version "3.3.1"}}
+{:deps    {prismatic/schema           {:mvn/version "1.2.0"}
+           nubank/matcher-combinators {:mvn/version "3.3.1"}}
  :aliases {:test        {:extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}
                          :extra-paths ["test/integration" "test/unit"]
                          :main-opts   ["-m" "kaocha.runner"]}
